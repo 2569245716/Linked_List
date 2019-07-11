@@ -1,0 +1,103 @@
+// linked_list
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _node
+{
+	int value;
+	struct _node *next;
+} Node;
+
+typedef struct _list
+{
+	Node *head;
+} List;
+
+void add(List *pList, int num)
+{
+	Node *p = (Node *)malloc(sizeof(Node));
+	p->value = num;
+	p->next = NULL;
+	// find the last
+	Node *last = pList->head;
+	if (last)
+	{
+		while (last->next)
+		{
+			last = last->next;
+		}
+		last->next = p; //attach
+	}
+	else
+		pList->head = p;
+}
+
+void print(List *pList)
+{
+	Node *p;
+	for (p = pList->head; p; p = p->next)
+		printf("%d ", p->value);
+	printf("\n");
+}
+
+void find_delete(List *pList, int figure)
+{
+	Node *p, *q;
+	int isFound = 0;
+	for (q = NULL, p = pList->head; p; q = p, p = p->next)
+	{
+		if (p->value == figure)
+		{
+			if (q)
+			{
+				q->next = p->next;
+			}
+			else
+			{
+				pList->head = p->next;
+			}
+			free(p);
+			isFound = 1;
+			break;
+		}
+	}
+	if (!isFound)
+		printf("Not Found!!\n");
+}
+
+void insert(List *pList, int n, int loc)
+{
+	Node *p = pList->head;
+	Node *j = (Node *)malloc(sizeof(Node));
+	j->value = n;
+	if (loc == 1)
+	{
+		pList->head = j;
+		pList->head->next = p;
+	}
+	while (++i<loc){
+		
+	}
+}
+
+int main(void)
+{
+	int num;
+	List list;
+	list.head = NULL;
+	do
+	{
+		scanf("%d", &num);
+		if (num != -1)
+			add(&list, num);
+	} while (num != -1);
+	print(&list);
+	scanf("%d", &num);
+	find_delete(&list, num);
+	print(&list);
+
+	getchar();
+	getchar();
+	return 0;
+}
+	 
